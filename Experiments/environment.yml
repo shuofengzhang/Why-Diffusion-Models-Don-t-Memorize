@@ -1,11 +1,17 @@
 name: memorization
 channels:
-  - conda-forge
   - pytorch
+  - nvidia
+  - conda-forge
   - defaults
 dependencies:
   # Python
   - python=3.10
+  
+  # PyTorch and related (from pytorch channel)
+  - pytorch
+  - torchvision
+  - pytorch-cuda=12.1  # Change to =12.1 for CUDA 12.x or remove for CPU-only
   
   # Core scientific computing
   - numpy
@@ -26,7 +32,3 @@ dependencies:
   # Pip (for any additional packages)
   - pip
 
-  # PyTorch and related (from pytorch channel)
-  - pytorch
-  - torchvision
-  - pytorch-cuda=11.4  # Change to =12.1 for CUDA 12.x or remove for CPU-only

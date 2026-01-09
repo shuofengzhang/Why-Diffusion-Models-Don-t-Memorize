@@ -91,7 +91,7 @@ def load_CelebA(config, loadtest=False, ntest=2048, index=0):
     std = torch.tensor([1.0, 1.0, 1.0])
     if config.CENTER:
         tmploader = torch.utils.data.DataLoader(trainset, batch_size=len(trainset),
-                                                  shuffle=False, num_workers=1)
+                                                  shuffle=False, num_workers=4)
         t_data = next(iter(tmploader))
         
         mean = torch.mean(t_data, axis=[0, 2, 3])

@@ -131,8 +131,11 @@ if __name__ == '__main__':
         path_checkpoint = config.path_save + '/{:s}/Models/Model_{:d}'.format(suffix, offset)
         model = loader.load_model(model, path_checkpoint)
         model.to(config.DEVICE)
-            
-    model = nn.DataParallel(model, device_ids = [0, 1])
+
+    # Use all visible GPUs; fallback to single-GPU when CUDA_VISIBLE_DEVICES restricts to one
+    available_devices = list(range(torch.cuda.device_count()))
+    if len(available_devices) > 1:
+        model = nn.DataParallel(model, device_ids=available_devices)
     model.to(config.DEVICE)
 
 if __name__ == '__main__':
